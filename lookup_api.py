@@ -30,9 +30,10 @@ def respondent(respondent_id):
 
 	cur = conn.cursor()
 	
-	sql = "insert into eligible_respondents(respondent_id) values(%s)" % (respondent_id)
+	sql = "insert into eligible_respondents(respondent_id) values(%s)"
+	data = (respondent_id,)
 	
-	return cur.execute(sql)
+	return cur.execute(sql, data)
 
 @app.route('/card/<respondent_id>', methods=['POST'])
 def card(respondent_id):
@@ -54,9 +55,10 @@ def card(respondent_id):
 	
 	card_id = cur.fetchone()
 	
-	insert_sql = "insert into claimed_cards(card_id, respondent_id) values(%s, %s)" % (card_id, respondent_id)
+	insert_sql = "insert into claimed_cards(card_id, respondent_id) values(%s, %s)" 
+	insert_data = (card_id, respondent_id)
 	
-	cur.execute(insert_sql)
+	cur.execute(insert_sql, insert_data)
 	
 
 if __name__ == '__main__':
