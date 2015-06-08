@@ -51,7 +51,8 @@ def card(respondent_id):
 			  "from cards c "
 			  "left join claimed_cards cc on cc.card_id = c.card_id "
 			  "where cc.row_id is null "
-			  "and %s in (select distinct respondent_id from elibible_respondents) "
+			  "and %s in (select distinct respondent_id from eligible_respondents) "
+			  #"and %s not in (select distinct respondent_id from claimed_cards) "
 			  "limit 1")
 	
 	data = (respondent_id,)
