@@ -6,6 +6,8 @@ create table decoded_lookup(
 	value char(8) not null
 );
 
+CREATE INDEX ON decoded_lookup (key);
+
 copy decoded_lookup(key, value) from '/tmp/decoded_lookup.csv' delimiter ',' csv;
 
 grant select on decoded_lookup to flask_user;
