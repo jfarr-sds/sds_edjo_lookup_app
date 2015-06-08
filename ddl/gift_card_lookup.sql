@@ -20,3 +20,13 @@ create table eligible_respondents(
 );
 
 create index on eligible_respondents (respondent_id);
+
+grant select on cards to flask_user;
+
+grant select, insert on claimed_cards to flask_user;
+
+grant select, insert on eligible_respondents to flask_user;
+
+grant usage on cards_row_id_seq to flask_user;
+grant usage on claimed_cards_row_id_seq to flask_user;
+grant usage on eligible_respondents_row_id_seq to flask_user;

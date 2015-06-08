@@ -35,7 +35,7 @@ def respondent(respondent_id):
 	return cur.execute(sql)
 
 @app.route('/card/<respondent_id>', methods=['POST'])
-def respondent(respondent_id):
+def card(respondent_id):
 	conn = psycopg2.connect("dbname='edjo_lookup' " + \
 	                        "user='flask_user' " + \
 	                        "host='127.0.0.1' " + \
@@ -47,7 +47,7 @@ def respondent(respondent_id):
 			  "from cards c "
 			  "left join claimed_cards cc on cc.card_id = c.card_id "
 			  "where cc.row_id is null "
-			  "and %s in (select respondent_id from respondents)" % (respondent_id) +
+			  "and %s in (select distinct respondent_id from elibible_respondents)" % (respondent_id) +
 			  "limit 1")
 			  
 	cur.execute(sql)
