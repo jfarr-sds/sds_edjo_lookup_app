@@ -45,8 +45,22 @@ def card(respondent_id):
 	                        "host='127.0.0.1' " + \
 	                        "password='password'")
 
+	card_id = 0
+	
 	cur = conn.cursor()
 	
+	sql = str("select cc.card_id " 
+	          "from claimed_cards cc "
+	          "where cc.respondent_id = %s ")
+	
+	data = (respondent_id,)
+	cur.execute(sql, data)
+	
+	card_id = cur.fetchone()
+
+	if card_id != 0:
+		return card_id
+
 	sql = str("select c.card_id "
 			  "from cards c "
 			  "left join claimed_cards cc on cc.card_id = c.card_id "
