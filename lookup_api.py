@@ -33,7 +33,8 @@ def respondent(respondent_id):
 	sql = "insert into eligible_respondents(respondent_id) values(%s)"
 	data = (respondent_id,)
 	
-	return cur.execute(sql, data)
+	cur.execute(sql, data)
+	conn.commit()
 
 @app.route('/card/<respondent_id>', methods=['POST'])
 def card(respondent_id):
@@ -48,7 +49,7 @@ def card(respondent_id):
 			  "from cards c "
 			  "left join claimed_cards cc on cc.card_id = c.card_id "
 			  "where cc.row_id is null "
-			  "and %s in (select distinct respondent_id from elibible_respondents)" % (respondent_id) +
+			  "and %s in (select distinct respondent_id from elibible_respondents) " % (respondent_id) +
 			  "limit 1")
 			  
 	cur.execute(sql)
@@ -59,6 +60,7 @@ def card(respondent_id):
 	insert_data = (card_id, respondent_id)
 	
 	cur.execute(insert_sql, insert_data)
+	conn.commit()
 	
 
 if __name__ == '__main__':
