@@ -35,6 +35,8 @@ def respondent(respondent_id):
 	
 	cur.execute(sql, data)
 	conn.commit()
+	
+	return "200"
 
 @app.route('/card/<respondent_id>', methods=['POST'])
 def card(respondent_id):
@@ -49,10 +51,11 @@ def card(respondent_id):
 			  "from cards c "
 			  "left join claimed_cards cc on cc.card_id = c.card_id "
 			  "where cc.row_id is null "
-			  "and %s in (select distinct respondent_id from elibible_respondents) " % (respondent_id) +
+			  "and %s in (select distinct respondent_id from elibible_respondents) "
 			  "limit 1")
-			  
-	cur.execute(sql)
+	
+	data = (respondent_id,)
+	cur.execute(sql, data)
 	
 	card_id = cur.fetchone()
 	
@@ -61,6 +64,8 @@ def card(respondent_id):
 	
 	cur.execute(insert_sql, insert_data)
 	conn.commit()
+	
+	return card_id
 	
 
 if __name__ == '__main__':
