@@ -32,7 +32,7 @@ def respondent(respondent_id):
 	
 	sql = "insert into eligible_respondents(respondent_id) values(%s)" % (respondent_id)
 	
-	cur.execute(sql)	                        
+	return cur.execute(sql)
 
 @app.route('/card/<respondent_id>', methods=['POST'])
 def respondent(respondent_id):
@@ -46,8 +46,8 @@ def respondent(respondent_id):
 	sql = str("select c.card_id "
 			  "from cards c "
 			  "left join claimed_cards cc on cc.card_id = c.card_id "
-			  "where cc.row_id is null 
-			  "and %s in (select respondent_id from respondents)" % (respondent_id)
+			  "where cc.row_id is null "
+			  "and %s in (select respondent_id from respondents)" % (respondent_id) +
 			  "limit 1")
 			  
 	cur.execute(sql)

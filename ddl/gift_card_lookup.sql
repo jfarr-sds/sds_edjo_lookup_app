@@ -3,7 +3,7 @@ create table cards(
 	card_id char(50) not null
 );
 
-CREATE INDEX ON cards (card_id);
+create index on cards (card_id);
 
 create table claimed_cards(
 	row_id serial primary key,
