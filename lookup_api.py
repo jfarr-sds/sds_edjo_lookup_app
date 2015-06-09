@@ -65,8 +65,8 @@ def card(respondent_id):
 	
 	try:
 		cur.execute(sql, data)
-		card_id = cur.fetchone()
-		if card_id != 0:
+		if cur.rowcount > 0:
+			card_id = cur.fetchone()
 			return card_id
 	except psycopg2.Error, e:
 		app.logger.error(e.pgerror)
@@ -97,7 +97,7 @@ def card(respondent_id):
 	except psycopg2.Error, e:
 		app.logger.error(e.pgerror)
 
-	
+
 	
 
 if __name__ == '__main__':
