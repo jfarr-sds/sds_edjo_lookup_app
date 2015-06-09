@@ -101,7 +101,7 @@ def card(respondent_id):
 	
 
 if __name__ == '__main__':
-	handler = RotatingFileHandler('flask.log', maxBytes=10000, backupCount=1)
+	handler = RotatingFileHandler('/home/flask/flask.log', maxBytes=10000, backupCount=1)
 	handler.setLevel(logging.INFO)
 	app.logger.addHandler(handler)
 	app.run()
