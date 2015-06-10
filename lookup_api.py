@@ -46,7 +46,7 @@ def respondent(respondent_id):
 		app.logger.error(e.pgerror)
 
 
-@app.route('/card/<respondent_id>', methods=['POST'])
+@app.route('/card/<respondent_id>', methods=['GET'])
 def card(respondent_id):
 	conn = psycopg2.connect("dbname='edjo_lookup' " + \
 	                        "user='flask_user' " + \
