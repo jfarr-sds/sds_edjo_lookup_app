@@ -1,0 +1,10 @@
+[uwsgi]
+chdir = /home/flask/
+wsgi-file = my_wsgi.py
+master = true
+processes = 5
+
+socket = lookup_api.sock
+chmod-socket = 660
+virtualenv = /home/flask/venv
+callable = app
